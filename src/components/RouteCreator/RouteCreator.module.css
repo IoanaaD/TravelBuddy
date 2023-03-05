@@ -1,0 +1,11 @@
+.intermediateDestinationContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.intermediateDestinationContainer svg{
+    width: 25px;
+    position: absolute;
+    cursor: pointer;
+}

@@ -1,0 +1,29 @@
+.eraseIconContainer {
+    position: absolute;
+    right: 0;
+    padding: 5px 10px 0px 0px;
+    z-index: 5;
+}
+
+.inputContainer {
+    position: relative;
+}
+
+.inputContainer input{
+    max-width: 350px !important;
+}
+
+.dropdown {
+    border: 1px solid #C7D1F4;
+    border-radius: 8px;
+    padding: 6px;
+}
+
+.dropdownRow {
+    padding: 5px;
+}
+
+.dropdownRow:hover {
+    background-color: #C7D1F4;
+    border-radius: 6px;
+}

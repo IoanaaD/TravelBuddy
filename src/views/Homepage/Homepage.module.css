@@ -1,0 +1,12 @@
+.homepageContainer {
+    padding: 38px;
+}
+
+.submitBtn{
+    width: 100px !important;
+}
+
+.submitBtnContainer {
+    display: flex;
+    justify-content: center;
+}
