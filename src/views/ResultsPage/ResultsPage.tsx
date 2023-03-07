@@ -10,10 +10,9 @@ const ResultsPage = () => {
   const navigate = useNavigate();
   const { calculatedDistances } = useContext(CalculatedDistancesContext);
   const { passengersNumber, date } = useContext(FormDataContext);
-  const totalDistance = calculatedDistances.reduce(
-    (partialSum, distance) => partialSum + distance,
-    0
-  );
+  const totalDistance = calculatedDistances
+    .reduce((partialSum, distance) => partialSum + distance, 0)
+    .toFixed(2);
 
   return (
     <Container className={ResultsPageStyles.containerExtraStyle}>
