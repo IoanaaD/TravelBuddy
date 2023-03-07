@@ -1,11 +1,29 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import DatePicker from "../../components/DatePicker/DatePicker";
 import PassengersInput from "../../components/PassengersInput/PassengersInput";
 import RouteCreator from "../../components/RouteCreator/RouteCreator";
+import { CitiesService } from "../../services/CitiesService";
 import HomepageStyles from "./Homepage.module.css";
+import { useNavigate } from "react-router-dom";
+import { FormDataContext } from "../../context/FormDataProvider";
+import { CalculatedDistancesContext } from "../../context/CalculatedDistancesProvider";
 
 const Homepage = () => {
+  const { firstCity, lastCity, intermediateCities } =
+    useContext(FormDataContext);
+
+  const { setCalculatedDistances } = useContext(CalculatedDistancesContext);
+
+  const navigate = useNavigate();
+
+  const onClickHandler = () => {
+    const introducedCities = [firstCity, ...intermediateCities, lastCity];
+    CitiesService.calculateDistance(introducedCities).then((result) => {
+      setCalculatedDistances(result);
+    });
+    navigate("/results");
+  };
   return (
     <Container className={HomepageStyles.homepageContainer}>
       <Row>
@@ -24,7 +42,9 @@ const Homepage = () => {
         </Col>
       </Row>
       <Row className={HomepageStyles.submitBtnContainer}>
-        <Button className={HomepageStyles.submitBtn}>Submit</Button>
+        <Button className={HomepageStyles.submitBtn} onClick={onClickHandler}>
+          Submit
+        </Button>
       </Row>
     </Container>
   );

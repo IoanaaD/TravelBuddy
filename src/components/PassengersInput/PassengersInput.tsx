@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import { useContext } from "react";
 import { MinusIcon, PlusIcon } from "../../assets/icons";
+import { FormDataContext } from "../../context/FormDataProvider";
 import PassengersInputStyles from "./PassengersInput.module.css";
 
 const PassengersInput = () => {
-  const [passengers, setPassengers] = useState(1);
+  const { passengersNumber, setPassengersNumber } = useContext(FormDataContext);
+
   return (
     <>
       <label>Passengers</label>
       <div className={`${PassengersInputStyles.counterContainer} mb-3`}>
-        <div onClick={() => setPassengers(passengers - 1)}>
+        <div onClick={() => setPassengersNumber(passengersNumber - 1)}>
           <MinusIcon />
         </div>
-        <div>{passengers}</div>
-        <div onClick={() => setPassengers(passengers + 1)}>
+        <div>{passengersNumber}</div>
+        <div onClick={() => setPassengersNumber(passengersNumber + 1)}>
           <PlusIcon />
         </div>
       </div>

@@ -1,22 +1,38 @@
-.eraseIconContainer {
+.eraseIconContainer svg {
     position: absolute;
-    right: 0;
-    padding: 5px 10px 0px 0px;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
     z-index: 5;
-}
+    cursor: pointer;
+    width: 14px;
+    height: 14px;
 
+}
+ 
 .inputContainer {
     position: relative;
+    display: flex;
+    gap: 12px;
+    align-items: center;
 }
 
-.inputContainer input{
-    max-width: 350px !important;
+.inputContainer input {
+    max-width: calc(100% - 40px);
+}
+
+.deleteBtnContainer svg {
+width: 25px;
+height: 25px;
 }
 
 .dropdown {
     border: 1px solid #C7D1F4;
     border-radius: 8px;
     padding: 6px;
+    position: absolute;
+    z-index: 10;
+    background-color: white;
 }
 
 .dropdownRow {
@@ -26,4 +42,8 @@
 .dropdownRow:hover {
     background-color: #C7D1F4;
     border-radius: 6px;
+}
+
+.relative {
+    position: relative;
 }

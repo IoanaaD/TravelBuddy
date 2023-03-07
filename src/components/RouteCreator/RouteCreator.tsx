@@ -1,47 +1,73 @@
-import React, { useState } from "react";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import { useContext } from "react";
+import { Button } from "react-bootstrap";
 import DestinationInput from "../DestinationInput/DestinationInput";
 import RouteCreatorStyles from "./RouteCreator.module.css";
 import { v4 as uuid } from "uuid";
-import { TrashIcon } from "../../assets/icons";
-import PassengersInput from "../PassengersInput/PassengersInput";
-import DatePicker from "../DatePicker/DatePicker";
+import { CityInfo } from "../../types";
+import { FormDataContext } from "../../context/FormDataProvider";
 
 const RouteCreator = () => {
-  const [intemediateDestinations, setIntemediateDestinations] = useState<{
-    [key: string]: string;
-  }>({});
-  const deleteIntermediateDestination = (key: string) => {
-    const copy = { ...intemediateDestinations };
-    delete copy[key];
-    setIntemediateDestinations(copy);
+  const {
+    setFirstCity,
+    setLastCity,
+    intermediateCities,
+    setIntermediateCities,
+  } = useContext(FormDataContext);
+
+  const deleteIntermediateDestination = (index: number) => {
+    let copy = [...intermediateCities];
+    copy.splice(index, 1);
+    setIntermediateCities(copy);
+  };
+
+  const addIntermediateDestination = () => {
+    setIntermediateCities([...intermediateCities, ["", 0, 0]]);
+  };
+
+  const updateFirstDestination = (selectedCity: CityInfo) => {
+    setFirstCity(selectedCity);
+  };
+
+  const updateIntermediateDestination = (
+    selectedCity: CityInfo,
+    index: number
+  ) => {
+    let copy = [...intermediateCities];
+    copy.splice(index!, 1, selectedCity);
+    setIntermediateCities(copy);
+  };
+
+  const updateLastDestination = (selectedCity: CityInfo) => {
+    setLastCity(selectedCity);
   };
 
   return (
-    <div className={RouteCreatorStyles.routeCreatorContainer}>
-      <DestinationInput label="City of origin" />
-      {Object.keys(intemediateDestinations).map((key) => (
+    <>
+      <DestinationInput
+        label="City of origin"
+        onDestinationSelected={updateFirstDestination}
+      />
+      {intermediateCities.map((item: any, index: number) => (
         <div className={RouteCreatorStyles.intermediateDestinationContainer}>
-          <DestinationInput key={key} label="Intermediate destination" />
-          <div onClick={() => deleteIntermediateDestination(key)}>
-            <TrashIcon />
-          </div>
+          <DestinationInput
+            key={uuid()}
+            label="Intermediate destination"
+            onDestinationSelected={(city) =>
+              updateIntermediateDestination(city, index)
+            }
+            city={item[0]}
+            onDelete={() => deleteIntermediateDestination(index)}
+          />
         </div>
       ))}
-      <DestinationInput label="City of destination" />
-      <Button
-        variant="link"
-        onClick={() =>
-          setIntemediateDestinations({
-            ...intemediateDestinations,
-            [uuid()]: "",
-          })
-        }
-      >
+      <DestinationInput
+        label="City of destination"
+        onDestinationSelected={updateLastDestination}
+      />
+      <Button variant="link" onClick={() => addIntermediateDestination()}>
         Add destination
       </Button>
-    </div>
+    </>
   );
 };
-
 export default RouteCreator;

@@ -1,4 +1,6 @@
-const cities = [
+import { CitiesInfo } from "../types";
+
+const cities: CitiesInfo = [
   ["Paris", 48.856614, 2.352222],
 
   ["Marseille", 43.296482, 5.36978],
