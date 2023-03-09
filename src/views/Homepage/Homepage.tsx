@@ -15,22 +15,15 @@ const schema = yup.object().shape({
   firstCity: yup.string().required("You must choose the city of origin"),
   lastCity: yup.string().required("You must choose the city of destination"),
   passengersNumber: yup.number().min(1, "Select passengers").required("test"),
-  intermediateCities: yup.array().of(
-    yup
-      .array()
-      .of(yup.mixed().oneOf([yup.string(), yup.number()]))
-      .test(
-        "is-valid",
-        "Please select a intermediate destination",
-        (value) =>
-          value &&
-          value.length === 3 &&
-          typeof value[0] === "string" &&
-          value[0].trim() !== "" &&
-          typeof value[1] === "number" &&
-          typeof value[2] === "number"
-      )
-  ),
+  intermediateCities: yup
+    .array()
+    .of(
+      yup
+        .array()
+        .of(
+          yup.string().trim().required("You must choose an intermediate city")
+        )
+    ),
   date: yup
     .string()
     .test("is-future-date", "Date must be in the future", (value) => {
@@ -76,7 +69,6 @@ const Homepage = () => {
     await schema
       .validate(formData, { abortEarly: false })
       .then((result) => {
-        console.log("Data is valid", result);
         formValidity = true;
       })
       .catch((errors) => {
@@ -84,7 +76,6 @@ const Homepage = () => {
         errors.inner.forEach((error: any) => {
           receivedErrorMessages[error.path] = error.message;
         });
-        console.log("RECEIVED ERRORS", receivedErrorMessages);
         setErrors(receivedErrorMessages);
         formValidity = false;
       });
