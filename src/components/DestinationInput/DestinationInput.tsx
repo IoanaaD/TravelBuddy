@@ -19,7 +19,6 @@ const DestinationInput: React.FC<{
   const filterCities = (input: string) => {
     if (input.length > 0) {
       CitiesService.filterCitiesByKeyword(input).then((result) => {
-        console.log("The filtered cities are:", result);
         setFilteredCities(result);
       });
     }

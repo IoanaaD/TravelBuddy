@@ -53,8 +53,6 @@ const RouteCreator = () => {
     setSearchParams(searchParams);
   };
 
-  console.log("Aaaaa", errors, errors.intermediateCities);
-
   return (
     <>
       <DestinationInput
@@ -81,10 +79,10 @@ const RouteCreator = () => {
             />
           </div>
           {/* @ts-ignore */}
-          {errors[`intermediateCities[${index}]`] && (
+          {errors[`intermediateCities[${index}]["0"]`] && (
             <p className={RouteCreatorStyles.errorMessageStyle}>
               {/* @ts-ignore */}
-              {errors[`intermediateCities[${index}]`]}
+              {errors[`intermediateCities[${index}]["0"]`]}
             </p>
           )}
         </>
