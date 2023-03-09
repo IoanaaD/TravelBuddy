@@ -1,6 +1,6 @@
 .eraseIconContainer svg {
     position: absolute;
-    right: 12px;
+    right: 60px;
     top: 50%;
     transform: translateY(-50%);
     z-index: 5;

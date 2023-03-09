@@ -9,7 +9,7 @@ import DestinationInputStyles from "./DestinationInput.module.css";
 const DestinationInput: React.FC<{
   label: string;
   onDestinationSelected: (selectedCity: CityInfo) => void;
-  city?: string;
+  city: string;
   onDelete?: () => void;
 }> = ({ label, onDestinationSelected, city, onDelete }) => {
   const [showDropdown, setShowDropdown] = useState(false);

@@ -1,3 +1,12 @@
 .datePicker {
     max-width: 150px;
 }
+
+.errorMessageStyle {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 16px;
+    color: #FF0000;
+} 
